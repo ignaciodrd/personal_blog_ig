@@ -1,27 +1,21 @@
+---
+# El "Front Matter" le dice a Jekyll que procese este archivo.
+layout: null
+---
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Blog Personal</title>
+    <!-- El título ahora usa la variable de _config.yml -->
+    <title>{{ site.title }} - Mi Blog Personal</title>
     
-    <!-- 
-      Paso 1: Cargar Tailwind CSS 
-      Esta línea "importa" todos los estilos de Tailwind sin necesidad 
-      de instalar nada. Mágico, ¿verdad?
-    -->
+    <!-- Mismo head de siempre -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- 
-      Paso 2: Configurar una fuente bonita (Inter)
-      También la cargamos desde Google Fonts.
-    -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    
     <script>
-      // Configuración opcional para Tailwind (para usar la fuente 'Inter')
       tailwind.config = {
         theme: {
           extend: {
@@ -32,115 +26,112 @@
         },
       }
     </script>
-    
     <style>
-      /* Un pequeño degradado para el fondo */
       body {
-        background-color: #f8fafc; /* Color de fondo si el degradado falla */
+        background-color: #f8fafc;
         background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
         background-size: 16px 16px;
       }
     </style>
 </head>
-
-<!-- 
-  Aquí empieza el contenido visible de tu página.
-  Las clases como "p-8", "max-w-3xl", "mx-auto" son de Tailwind.
-  - "p-8": padding (relleno) de 8 unidades.
-  - "max-w-3xl": ancho máximo.
-  - "mx-auto": centrar horizontalmente (margin-left: auto; margin-right: auto).
-  - "mt-10": margen superior de 10 unidades.
--->
 <body class="font-sans text-gray-800">
 
     <div class="container mx-auto max-w-3xl p-6 md:p-10">
 
-        <!-- SECCIÓN 1: Encabezado (Tu Nombre y Título) -->
+        <!-- SECCIÓN 1: Encabezado -->
         <header class="text-center mt-12 mb-16">
             <h1 class="text-5xl font-bold text-gray-900">
-                <!-- TODO: Cambia esto por tu nombre -->
-                Tu Nombre Aquí
+                <!-- Variable de _config.yml -->
+                {{ site.title }}
             </h1>
             <p class="text-xl text-gray-600 mt-3">
-                <!-- TODO: Cambia esto por tu título/rol -->
-                Desarrollador, Escritor, Creador, etc.
+                Desarrollador, Escritor, Creador.
             </p>
         </header>
 
         <main>
             
-            <!-- SECCIÓN 2: Sobre Mí (Aquí irá tu CV resumido) -->
+            <!-- SECCIÓN 2: Sobre Mí -->
             <section id="sobre-mi" class="mb-16 p-8 bg-white rounded-xl shadow-lg border border-gray-200">
                 <h2 class="text-3xl font-bold mb-4">Sobre Mí</h2>
                 <p class="text-gray-700 leading-relaxed">
-                    <!-- TODO: Escribe una breve biografía -->
-                    ¡Bienvenido a mi espacio personal! Soy un apasionado por [Tu Pasión 1] y [Tu Pasión 2].
-                    Actualmente estoy aprendiendo a construir mi propio sitio web desde cero. 
-                    Este proyecto es mi primer paso para documentar mi viaje en [Tu Industria/Campo].
-                    Mi objetivo es [Tu Objetivo].
+                    <!-- TODO: Actualiza tu descripción -->
+                    ¡Bienvenido a mi espacio personal! Soy un apasionado por la tecnología y
+                    el aprendizaje. Este proyecto es mi primer paso para documentar mi viaje...
                 </p>
-                <a href="./cv.pdf" class="inline-block mt-6 bg-blue-600 text-white font-medium py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
-                    <!-- TODO: Sube tu CV (PDF) al repositorio y enlaza aquí -->
+                <!-- 
+                  Variable 'baseurl' de _config.yml para asegurar que el enlace funcione
+                  tanto en local como en GitHub Pages.
+                -->
+                <a href="{{ site.baseurl }}/cv.pdf" class="inline-block mt-6 bg-blue-600 text-white font-medium py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
                     Ver mi CV completo
                 </a>
             </section>
             
-            <!-- SECCIÓN 3: Artículos (Tu Blog) -->
+            <!-- SECCIÓN 3: Artículos (¡Automágica!) -->
             <section id="blog" class="mb-16">
                 <h2 class="text-3xl font-bold mb-6">Artículos Recientes</h2>
                 
                 <!-- 
-                  TODO: Este es un artículo de ejemplo. 
-                  Puedes copiar y pegar este bloque "div" para cada nuevo artículo.
+                  AQUÍ VA LA MAGIA DE JEKYLL:
+                  Esto es un "loop" (bucle). Jekyll buscará en la carpeta _posts,
+                  los ordenará por fecha (el más nuevo primero) y creará un
+                  bloque de HTML para cada uno.
                 -->
+                {% for post in site.posts %}
                 <div class="mb-8 p-8 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                    <h3 class="text-2xl font-bold mb-2">Mi Primer Artículo</h3>
-                    <p class="text-gray-500 mb-4 text-sm">Publicado el 22 de octubre, 2025</p>
-                    <p class="text-gray-700 leading-relaxed">
-                        Este es un resumen de mi primer artículo. Aquí hablaré sobre [Tema del artículo].
-                        Aprender a programar y desplegar este sitio es una aventura...
+                    <h3 class="text-2xl font-bold mb-2">
+                        <!-- Título del post -->
+                        {{ post.title }}
+                    </h3>
+                    <p class="text-gray-500 mb-4 text-sm">
+                        <!-- Fecha del post, formateada -->
+                        Publicado el {{ post.date | date: "%d de %B, %Y" }}
                     </p>
-                    <a href="./articulo1.html" class="text-blue-600 font-medium mt-4 inline-block hover:underline">
+                    <p class="text-gray-700 leading-relaxed">
+                        <!-- 
+                          {{ post.excerpt }} es un resumen automático 
+                          (normalmente el primer párrafo del archivo .md)
+                        -->
+                        {{ post.excerpt }}
+                    </p>
+                    <!-- 
+                      'relative_url' es otra ayuda de Jekyll
+                      para crear el enlace correcto al post.
+                    -->
+                    <a href="{{ post.url | relative_url }}" class="text-blue-600 font-medium mt-4 inline-block hover:underline">
                         Leer más &rarr;
                     </a>
                 </div>
-                
-                <!-- Artículo de ejemplo 2 -->
-                <div class="mb-8 p-8 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                    <h3 class="text-2xl font-bold mb-2">El Siguiente Paso</h3>
-                    <p class="text-gray-500 mb-4 text-sm">Próximamente</p>
-                    <p class="text-gray-700 leading-relaxed">
-                        Aquí va mi próximo artículo sobre el tema.
-                    </p>
-                    <a href="./articulo2.html" class="text-blue-600 font-medium mt-4 inline-block hover:underline">
-                        Leer más &rarr;
-                    </a>
-                </div>
+                {% endfor %}
+                <!-- Fin del loop mágico -->
 
             </section>
             
-            <!-- SECCIÓN 4: Redes Sociales (RRSS) -->
+            <!-- SECCIÓN 4: Redes Sociales -->
             <section id="contacto" class="text-center mb-16">
                 <h2 class="text-3xl font-bold mb-6">Conecta Conmigo</h2>
                 <div class="flex justify-center space-x-6">
-                    <!-- TODO: Reemplaza "#" con tus enlaces reales -->
-                    <a href="https://www.linkedin.com/ignacio-duarte" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
+                    <!-- TODO: Añade tus URLs de redes sociales -->
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
                         LinkedIn
                     </a>
-                    <a href="https://github.com/ignaciodrd" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
                         GitHub
                     </a>
-                   
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
+                        Twitter / X
+                    </a>
                 </div>
             </section>
 
         </main>
         
         <footer class="text-center text-gray-500 py-8 border-t border-gray-200">
-            <p>&copy; 2025 Tu Nombre Aquí. Construido con HTML y Tailwind CSS.</p>
+            <!-- Variable de _config.yml -->
+            <p>&copy; 2025 {{ site.title }}. Construido con Jekyll y Tailwind CSS.</p>
         </footer>
-
     </div>
-
 </body>
 </html>
+
