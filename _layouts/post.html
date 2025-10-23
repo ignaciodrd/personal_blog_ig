@@ -1,0 +1,85 @@
+---
+<!-- 
+  Esto es una "plantilla" de Jekyll.
+  Jekyll tomará el contenido de tus artículos (en Markdown)
+  y lo insertará donde dice {{ content }}.
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- El título ahora viene del "front matter" del artículo -->
+    <title>{{ page.title }} - {{ site.title }}</title>
+    
+    <!-- Cargamos Tailwind y las fuentes (igual que antes) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        background-color: #f8fafc;
+        background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+        background-size: 16px 16px;
+      }
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+
+    <div class="container mx-auto max-w-3xl p-6 md:p-10">
+
+        <main>
+            <article class="mt-12 mb-16 p-8 md:p-10 bg-white rounded-xl shadow-lg border border-gray-200">
+                
+                <!-- Título (del "front matter") -->
+                <h1 class="text-4xl font-bold text-gray-900 mb-3">
+                    {{ page.title }}
+                </h1>
+                
+                <!-- Fecha (del "front matter") -->
+                <p class="text-gray-500 mb-8">
+                    Publicado el {{ page.date | date: "%d de %B, %Y" }}
+                </p>
+                
+                <!-- 
+                  AQUÍ VA LA MAGIA:
+                  Jekyll inserta el contenido de tu archivo Markdown aquí.
+                  Añadimos clases de "prose" para que el Markdown se vea bonito.
+                -->
+                <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+                    {{ content }}
+                </div>
+
+            </article>
+            
+            <!-- Enlace para Volver -->
+            <div class="text-center">
+                <!-- Usamos la URL base de Jekyll para el enlace -->
+                <a href="{{ site.baseurl }}/" class="text-blue-600 font-medium hover:underline">
+                    &larr; Volver al inicio
+                </a>
+            </div>
+            
+        </main>
+        
+        <footer class="text-center text-gray-500 py-8 mt-12 border-t border-gray-200">
+            <p>&copy; 2025 {{ site.title }}. Construido con Jekyll y Tailwind CSS.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+
