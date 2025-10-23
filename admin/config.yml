@@ -1,0 +1,26 @@
+# Le dice al CMS que use GitHub para guardar los archivos
+backend:
+  name: github
+  # El nombre exacto de tu repositorio
+  repo: ignaciodrd/personal_blog_ig 
+  # La rama principal donde trabajas
+  branch: main 
+
+# Dónde guardar las imágenes que subas (creará esta carpeta)
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+# Esto define qué puede "editar" el CMS
+collections:
+  # Le decimos que hay una colección de "Artículos"
+  - name: "posts"                  # Nombre interno
+    label: "Artículos"             # Nombre que ves en la interfaz
+    folder: "_posts"               # ¡La carpeta donde Jekyll guarda los artículos!
+    create: true                   # Permite crear nuevos
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Cómo nombra el archivo .md
+    fields:                        # Los campos que te pedirá en el formulario
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
+
