@@ -1,26 +1,27 @@
-# Le dice al CMS que use GitHub para guardar los archivos
 backend:
   name: github
-  # El nombre exacto de tu repositorio
-  repo: ignaciodrd/personal_blog_ig 
-  # La rama principal donde trabajas
-  branch: main 
+  repo: ignaciodrd/personal_blog_ig # Ruta a tu repositorio
+  branch: main # O la rama principal que estés usando
+  
+  # --- ¡AQUÍ ESTÁ LA CORRECCIÓN! ---
+  # Esto le dice a Decap que use la autenticación de GitHub directamente
+  # en lugar de la de Netlify (que es el default).
+  base_url: https://ignaciodrd.github.io
+  auth_type: github
+  # --- Fin de la corrección ---
 
-# Dónde guardar las imágenes que subas (creará esta carpeta)
-media_folder: "assets/images"
-public_folder: "/assets/images"
+media_folder: "assets/images" # Dónde guardar las imágenes
+public_folder: "/assets/images" # Cómo acceder a ellas
 
-# Esto define qué puede "editar" el CMS
 collections:
-  # Le decimos que hay una colección de "Artículos"
-  - name: "posts"                  # Nombre interno
-    label: "Artículos"             # Nombre que ves en la interfaz
-    folder: "_posts"               # ¡La carpeta donde Jekyll guarda los artículos!
-    create: true                   # Permite crear nuevos
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Cómo nombra el archivo .md
-    fields:                        # Los campos que te pedirá en el formulario
-      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+  - name: "blog" # ID de la colección
+    label: "Artículos del Blog" # Nombre en la UI
+    folder: "_posts" # Dónde se guardan los archivos
+    create: true # Permitir crear nuevos
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Formato del nombre de archivo
+    fields: # Campos para cada artículo
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
 
