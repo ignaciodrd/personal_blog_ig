@@ -1,26 +1,37 @@
 <!doctype html>
-<html>
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administración del Blog</title>
   
-  <!-- 
-    Los scripts se han movido al final del <body> 
-    para asegurar que la página cargue primero.
-  -->
-
+  <!-- Estilos para la fuente Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Aplicar la fuente Inter a la interfaz de administración */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
 <body>
+  <!-- Contenedor donde Decap CMS cargará la aplicación -->
+  <div id="nc-root"></div>
 
   <!-- 
-    Los scripts se colocan aquí.
-    El navegador primero lee el <body>, luego ejecuta los scripts.
-    Esto soluciona el error 'appendChild' (no encontraba el <body>).
+    Cargamos los scripts al FINAL del body.
+    Esto soluciona el error 'appendChild' porque asegura que la página 
+    (especialmente el div#nc-root) exista antes de que los scripts intenten usarla.
   -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script src="gemini-integration.js"></script>
-
+  
+  <!-- Script principal de Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.1.10/dist/decap-cms.js"></script>
+  
+  <!-- Nuestro script personalizado de Gemini (lo cargamos DESPUÉS del CMS) -->
+  <script src="./gemini-integration.js"></script>
 </body>
 </html>
 

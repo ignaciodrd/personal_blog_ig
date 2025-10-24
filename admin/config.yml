@@ -4,11 +4,10 @@ backend:
   branch: main # O la rama principal que estés usando
   
   # --- CORRECCIÓN FINAL (v2) ---
+  # Le decimos explícitamente que use 'pkce'.
+  # y forzamos la URL del gateway para evitar
+  # cualquier redirección a Netlify.
   auth_type: pkce
-  
-  # ¡NUEVA LÍNEA!
-  # Para ser 100% explícitos y forzarlo a usar
-  # el gateway correcto y no el de Netlify.
   gateway_url: https://gateway.decapcms.org
   # --- Fin de la corrección ---
 
