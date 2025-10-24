@@ -3,12 +3,13 @@ backend:
   repo: ignaciodrd/personal_blog_ig # Ruta a tu repositorio
   branch: main # O la rama principal que estés usando
   
-  # --- CORRECCIÓN FINAL ---
-  # Le decimos explícitamente que use 'pkce'.
-  # Este es el método de login moderno y seguro que usa
-  # el 'auth gateway' (gateway.decapcms.org) por defecto
-  # y NO intentará ir a Netlify.
+  # --- CORRECCIÓN FINAL (v2) ---
   auth_type: pkce
+  
+  # ¡NUEVA LÍNEA!
+  # Para ser 100% explícitos y forzarlo a usar
+  # el gateway correcto y no el de Netlify.
+  gateway_url: https://gateway.decapcms.org
   # --- Fin de la corrección ---
 
 media_folder: "assets/images" # Dónde guardar las imágenes
