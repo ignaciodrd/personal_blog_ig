@@ -1,28 +1,23 @@
 backend:
   name: github
-  repo: ignaciodrd/personal_blog_ig # Ruta a tu repositorio
-  branch: main # O la rama principal que estés usando
+  repo: ignaciodrd/personal_blog_ig
+  branch: main
   
-  # --- CORRECCIÓN FINAL (v2) ---
-  # Le decimos explícitamente que use 'pkce'.
-  # y forzamos la URL del gateway para evitar
-  # cualquier redirección a Netlify.
-  auth_type: pkce
-  gateway_url: https://gateway.decapcms.org
-  # --- Fin de la corrección ---
+  # Usa el servicio de autenticación oficial de Decap
+  base_url: https://api.decapcms.org
+  auth_endpoint: auth
 
-media_folder: "assets/images" # Dónde guardar las imágenes
-public_folder: "/assets/images" # Cómo acceder a ellas
+media_folder: "assets/images"
+public_folder: "/assets/images"
 
 collections:
-  - name: "blog" # ID de la colección
-    label: "Artículos del Blog" # Nombre en la UI
-    folder: "_posts" # Dónde se guardan los archivos
-    create: true # Permitir crear nuevos
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Formato del nombre de archivo
-    fields: # Campos para cada artículo
+  - name: "blog"
+    label: "Artículos del Blog"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha", name: "date", widget: "datetime" }
       - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
-
