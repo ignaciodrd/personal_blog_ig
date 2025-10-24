@@ -6,10 +6,21 @@
   <title>Administración del Blog</title>
   
   <!-- 
-    Esto carga el script de Decap CMS (el "cerebro" del administrador)
-    Él mismo buscará el archivo config.yml automáticamente.
+    Los scripts se han movido al final del <body> 
+    para asegurar que la página cargue primero.
   -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
 </head>
 <body>
+
+  <!-- 
+    Los scripts se colocan aquí.
+    El navegador primero lee el <body>, luego ejecuta los scripts.
+    Esto soluciona el error 'appendChild' (no encontraba el <body>).
+  -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="gemini-integration.js"></script>
+
+</body>
+</html>
+
