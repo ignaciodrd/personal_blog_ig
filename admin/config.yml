@@ -3,11 +3,12 @@ backend:
   repo: ignaciodrd/personal_blog_ig # Ruta a tu repositorio
   branch: main # O la rama principal que estés usando
   
-  # --- CORRECCIÓN ---
-  # Hemos eliminado las líneas 'base_url' y 'auth_type: github'.
-  # Esto permitirá que Decap use el 'auth gateway' por defecto,
-  # que es un servicio gratuito que maneja el login con GitHub
-  # por nosotros.
+  # --- CORRECCIÓN FINAL ---
+  # Le decimos explícitamente que use 'pkce'.
+  # Este es el método de login moderno y seguro que usa
+  # el 'auth gateway' (gateway.decapcms.org) por defecto
+  # y NO intentará ir a Netlify.
+  auth_type: pkce
   # --- Fin de la corrección ---
 
 media_folder: "assets/images" # Dónde guardar las imágenes
