@@ -41,7 +41,7 @@ layout: null
                 {{ site.title }}
             </h1>
             <p class="text-xl text-gray-600 mt-3">
-                productero, escritor, creador
+                Desarrollador, Escritor, Creador.
             </p>
         </header>
 
@@ -52,9 +52,9 @@ layout: null
                 <h2 class="text-3xl font-bold mb-4">Sobre Mí</h2>
                 <p class="text-gray-700 leading-relaxed">
                     ¡Bienvenido a mi espacio personal! Soy un apasionado por la tecnología y
-                    el aprendizaje. Este proyecto fue mi primer paso para documentar mi viaje...
+                    el aprendizaje. Este proyecto es mi primer paso para documentar mi viaje...
                 </p>
-                <a href="{{ site.baseurl }}/CV_Ejecutivo_Ignacio_Duarte.pdf" class="inline-block mt-6 bg-blue-600 text-white font-medium py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
+                <a href="{{ site.baseurl }}/assets/CV_Ejecutivo_Ignacio_Duarte.pdf" class="inline-block mt-6 bg-blue-600 text-white font-medium py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
                     Ver mi CV completo
                 </a>
             </section>
@@ -80,7 +80,8 @@ layout: null
                         
                         <!-- Lista de artículos del proyecto -->
                         <div class="space-y-3 ml-4">
-                            {% for articulo in grupo.items %}
+                            {% assign articulos_ordenados = grupo.items | sort: 'date' | reverse %}
+                            {% for articulo in articulos_ordenados %}
                             <div class="border-l-4 border-blue-200 pl-4 py-2 hover:border-blue-400 transition-colors">
                                 <a href="{{ articulo.url | relative_url }}" class="block">
                                     <h4 class="font-bold text-gray-900 hover:text-blue-600">
@@ -144,7 +145,8 @@ layout: null
                 
                 {% if site.reflexiones.size > 0 %}
                 <div class="space-y-6">
-                    {% for reflexion in site.reflexiones limit:3 %}
+                    {% assign reflexiones_ordenadas = site.reflexiones | sort: 'date' | reverse %}
+                    {% for reflexion in reflexiones_ordenadas limit:3 %}
                     <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-xl font-bold mb-2">
                             {{ reflexion.title }}
@@ -177,7 +179,8 @@ layout: null
                 
                 {% if site.otros.size > 0 %}
                 <div class="space-y-6">
-                    {% for otro in site.otros limit:3 %}
+                    {% assign otros_ordenados = site.otros | sort: 'date' | reverse %}
+                    {% for otro in otros_ordenados limit:3 %}
                     <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-xl font-bold mb-2">
                             {{ otro.title }}
@@ -205,20 +208,22 @@ layout: null
             <section id="contacto" class="text-center mb-16">
                 <h2 class="text-3xl font-bold mb-6">Conecta Conmigo</h2>
                 <div class="flex justify-center space-x-6">
-                    <a href="https://linkedin.com/in/ignacio-duarte" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
                         LinkedIn
                     </a>
-                    <a href="https://github.com/ignaciodrd" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
                         GitHub
                     </a>
-               
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
+                        Twitter / X
+                    </a>
                 </div>
             </section>
 
         </main>
         
         <footer class="text-center text-gray-500 py-8 border-t border-gray-200">
-            <p>&copy; 2025 {{ site.title }}. Construido con: Jekyll y Tailwind CSS; Claude y Gemini; Github y Prose.io.</p>
+            <p>&copy; 2025 {{ site.title }}. Construido con Jekyll y Tailwind CSS.</p>
         </footer>
     </div>
 </body>
