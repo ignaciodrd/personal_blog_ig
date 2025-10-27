@@ -59,7 +59,7 @@ layout: null
                 </a>
             </section>
             
-            <!-- SECCIÓN: PROYECTOS -->
+            <!-- SECCIÓN: PROYECTOS AGRUPADOS -->
             <section id="proyectos" class="mb-16">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-3xl font-bold">Proyectos</h2>
@@ -67,24 +67,67 @@ layout: null
                 </div>
                 
                 {% if site.proyectos.size > 0 %}
-                <div class="grid gap-6 md:grid-cols-2">
-                    {% for proyecto in site.proyectos limit:4 %}
-                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                        <h3 class="text-xl font-bold mb-2">
-                            {{ proyecto.title }}
+                
+                {% assign proyectos_agrupados = site.proyectos | group_by: "proyecto" %}
+                
+                {% for grupo in proyectos_agrupados %}
+                    {% if grupo.name != "" %}
+                    <!-- Cada proyecto en su propia tarjeta -->
+                    <div class="mb-8 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
+                        <h3 class="text-2xl font-bold text-blue-600 mb-4">
+                            📁 {{ grupo.name }}
                         </h3>
-                        <p class="text-gray-500 mb-3 text-sm">
-                            {{ proyecto.date | date: "%d de %B, %Y" }}
-                        </p>
-                        <p class="text-gray-700 leading-relaxed mb-4">
-                            {{ proyecto.excerpt | strip_html | truncatewords: 25 }}
-                        </p>
-                        <a href="{{ proyecto.url | relative_url }}" class="text-blue-600 font-medium hover:underline">
-                            Leer más &rarr;
-                        </a>
+                        
+                        <!-- Lista de artículos del proyecto -->
+                        <div class="space-y-3 ml-4">
+                            {% for articulo in grupo.items %}
+                            <div class="border-l-4 border-blue-200 pl-4 py-2 hover:border-blue-400 transition-colors">
+                                <a href="{{ articulo.url | relative_url }}" class="block">
+                                    <h4 class="font-bold text-gray-900 hover:text-blue-600">
+                                        {{ articulo.title }}
+                                    </h4>
+                                    <p class="text-sm text-gray-500 mt-1">
+                                        {{ articulo.date | date: "%d de %B, %Y" }}
+                                    </p>
+                                    {% if articulo.excerpt %}
+                                    <p class="text-gray-600 text-sm mt-2">
+                                        {{ articulo.excerpt | strip_html | truncatewords: 20 }}
+                                    </p>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                
+                <!-- Artículos sin proyecto asignado -->
+                {% assign sin_proyecto = site.proyectos | where: "proyecto", "" %}
+                {% if sin_proyecto.size > 0 %}
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-600 mb-4">📌 Otros Proyectos</h3>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        {% for articulo in sin_proyecto %}
+                        <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                            <h4 class="text-lg font-bold mb-2">
+                                {{ articulo.title }}
+                            </h4>
+                            <p class="text-gray-500 mb-3 text-sm">
+                                {{ articulo.date | date: "%d de %B, %Y" }}
+                            </p>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                {{ articulo.excerpt | strip_html | truncatewords: 25 }}
+                            </p>
+                            <a href="{{ articulo.url | relative_url }}" class="text-blue-600 font-medium hover:underline">
+                                Leer más &rarr;
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
+                {% endif %}
+                
                 {% else %}
                 <div class="p-8 bg-gray-50 rounded-xl border border-gray-200 text-center">
                     <p class="text-gray-500">Pronto compartiré mis proyectos aquí...</p>

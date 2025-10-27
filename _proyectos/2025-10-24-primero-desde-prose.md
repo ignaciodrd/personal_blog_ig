@@ -1,10 +1,19 @@
 ---
 layout: post
-title: "Mi Primer Posteo desde Prose.io"
-date: 2025-10-22
+title: "Primer Post desde Prose.io"
+date: 2025-10-24
+excerpt: "Probando la creación de contenido directamente desde Prose.io"
 ---
 
-## A New Post
+## Una Nueva Forma de Escribir
 
-Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
-Esto es una prueba desde prose.io ojalá que vaya
+Esta es una prueba desde Prose.io. La idea es poder escribir artículos de manera más visual y cómoda, sin tener que lidiar directamente con GitHub.
+
+## ¿Por qué Prose.io?
+
+- Interfaz simple e intuitiva
+- Editor Markdown con vista previa
+- Se conecta directamente a GitHub
+- No requiere instalación
+
+Espero que este flujo de trabajo funcione bien.

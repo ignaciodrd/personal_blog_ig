@@ -11,7 +11,7 @@ markdown: kramdown
 collections:
   proyectos:
     output: true
-    permalink: /proyectos/:name/
+    permalink: /proyectos/:path/
   reflexiones:
     output: true
     permalink: /reflexiones/:name/
