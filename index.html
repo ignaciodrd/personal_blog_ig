@@ -1,5 +1,4 @@
 ---
-# El "Front Matter" le dice a Jekyll que procese este archivo.
 layout: null
 ---
 <!DOCTYPE html>
@@ -7,10 +6,8 @@ layout: null
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- El título ahora usa la variable de _config.yml -->
     <title>{{ site.title }} - Mi Blog Personal</title>
     
-    <!-- Mismo head de siempre -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,12 +33,11 @@ layout: null
 </head>
 <body class="font-sans text-gray-800">
 
-    <div class="container mx-auto max-w-3xl p-6 md:p-10">
+    <div class="container mx-auto max-w-4xl p-6 md:p-10">
 
-        <!-- SECCIÓN 1: Encabezado -->
+        <!-- ENCABEZADO -->
         <header class="text-center mt-12 mb-16">
             <h1 class="text-5xl font-bold text-gray-900">
-                <!-- Variable de _config.yml -->
                 {{ site.title }}
             </h1>
             <p class="text-xl text-gray-600 mt-3">
@@ -51,68 +47,121 @@ layout: null
 
         <main>
             
-            <!-- SECCIÓN 2: Sobre Mí -->
+            <!-- SECCIÓN: SOBRE MÍ -->
             <section id="sobre-mi" class="mb-16 p-8 bg-white rounded-xl shadow-lg border border-gray-200">
                 <h2 class="text-3xl font-bold mb-4">Sobre Mí</h2>
                 <p class="text-gray-700 leading-relaxed">
-                    <!-- TODO: Actualiza tu descripción -->
                     ¡Bienvenido a mi espacio personal! Soy un apasionado por la tecnología y
                     el aprendizaje. Este proyecto es mi primer paso para documentar mi viaje...
                 </p>
-                <!-- 
-                  Variable 'baseurl' de _config.yml para asegurar que el enlace funcione
-                  tanto en local como en GitHub Pages.
-                -->
                 <a href="{{ site.baseurl }}/cv.pdf" class="inline-block mt-6 bg-blue-600 text-white font-medium py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
                     Ver mi CV completo
                 </a>
             </section>
             
-            <!-- SECCIÓN 3: Artículos (¡Automágica!) -->
-            <section id="blog" class="mb-16">
-                <h2 class="text-3xl font-bold mb-6">Artículos Recientes</h2>
-                
-                <!-- 
-                  AQUÍ VA LA MAGIA DE JEKYLL:
-                  Esto es un "loop" (bucle). Jekyll buscará en la carpeta _posts,
-                  los ordenará por fecha (el más nuevo primero) y creará un
-                  bloque de HTML para cada uno.
-                -->
-                {% for post in site.posts %}
-                <div class="mb-8 p-8 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                    <h3 class="text-2xl font-bold mb-2">
-                        <!-- Título del post -->
-                        {{ post.title }}
-                    </h3>
-                    <p class="text-gray-500 mb-4 text-sm">
-                        <!-- Fecha del post, formateada -->
-                        Publicado el {{ post.date | date: "%d de %B, %Y" }}
-                    </p>
-                    <p class="text-gray-700 leading-relaxed">
-                        <!-- 
-                          {{ post.excerpt }} es un resumen automático 
-                          (normalmente el primer párrafo del archivo .md)
-                        -->
-                        {{ post.excerpt }}
-                    </p>
-                    <!-- 
-                      'relative_url' es otra ayuda de Jekyll
-                      para crear el enlace correcto al post.
-                    -->
-                    <a href="{{ post.url | relative_url }}" class="text-blue-600 font-medium mt-4 inline-block hover:underline">
-                        Leer más &rarr;
-                    </a>
+            <!-- SECCIÓN: PROYECTOS -->
+            <section id="proyectos" class="mb-16">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold">Proyectos</h2>
+                    <span class="text-blue-600 font-medium">🚀</span>
                 </div>
-                {% endfor %}
-                <!-- Fin del loop mágico -->
-
+                
+                {% if site.proyectos.size > 0 %}
+                <div class="grid gap-6 md:grid-cols-2">
+                    {% for proyecto in site.proyectos limit:4 %}
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold mb-2">
+                            {{ proyecto.title }}
+                        </h3>
+                        <p class="text-gray-500 mb-3 text-sm">
+                            {{ proyecto.date | date: "%d de %B, %Y" }}
+                        </p>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            {{ proyecto.excerpt | strip_html | truncatewords: 25 }}
+                        </p>
+                        <a href="{{ proyecto.url | relative_url }}" class="text-blue-600 font-medium hover:underline">
+                            Leer más &rarr;
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="p-8 bg-gray-50 rounded-xl border border-gray-200 text-center">
+                    <p class="text-gray-500">Pronto compartiré mis proyectos aquí...</p>
+                </div>
+                {% endif %}
             </section>
             
-            <!-- SECCIÓN 4: Redes Sociales -->
+            <!-- SECCIÓN: REFLEXIONES -->
+            <section id="reflexiones" class="mb-16">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold">Reflexiones</h2>
+                    <span class="text-purple-600 font-medium">💭</span>
+                </div>
+                
+                {% if site.reflexiones.size > 0 %}
+                <div class="space-y-6">
+                    {% for reflexion in site.reflexiones limit:3 %}
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold mb-2">
+                            {{ reflexion.title }}
+                        </h3>
+                        <p class="text-gray-500 mb-3 text-sm">
+                            {{ reflexion.date | date: "%d de %B, %Y" }}
+                        </p>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            {{ reflexion.excerpt | strip_html | truncatewords: 30 }}
+                        </p>
+                        <a href="{{ reflexion.url | relative_url }}" class="text-purple-600 font-medium hover:underline">
+                            Leer más &rarr;
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="p-8 bg-gray-50 rounded-xl border border-gray-200 text-center">
+                    <p class="text-gray-500">Pronto compartiré mis reflexiones aquí...</p>
+                </div>
+                {% endif %}
+            </section>
+            
+            <!-- SECCIÓN: OTROS -->
+            <section id="otros" class="mb-16">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold">Otros</h2>
+                    <span class="text-green-600 font-medium">✨</span>
+                </div>
+                
+                {% if site.otros.size > 0 %}
+                <div class="space-y-6">
+                    {% for otro in site.otros limit:3 %}
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-bold mb-2">
+                            {{ otro.title }}
+                        </h3>
+                        <p class="text-gray-500 mb-3 text-sm">
+                            {{ otro.date | date: "%d de %B, %Y" }}
+                        </p>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            {{ otro.excerpt | strip_html | truncatewords: 30 }}
+                        </p>
+                        <a href="{{ otro.url | relative_url }}" class="text-green-600 font-medium hover:underline">
+                            Leer más &rarr;
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="p-8 bg-gray-50 rounded-xl border border-gray-200 text-center">
+                    <p class="text-gray-500">Contenido variado próximamente...</p>
+                </div>
+                {% endif %}
+            </section>
+            
+            <!-- SECCIÓN: REDES SOCIALES -->
             <section id="contacto" class="text-center mb-16">
                 <h2 class="text-3xl font-bold mb-6">Conecta Conmigo</h2>
                 <div class="flex justify-center space-x-6">
-                    <!-- TODO: Añade tus URLs de redes sociales -->
                     <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
                         LinkedIn
                     </a>
@@ -128,10 +177,8 @@ layout: null
         </main>
         
         <footer class="text-center text-gray-500 py-8 border-t border-gray-200">
-            <!-- Variable de _config.yml -->
             <p>&copy; 2025 {{ site.title }}. Construido con Jekyll y Tailwind CSS.</p>
         </footer>
     </div>
 </body>
 </html>
-
