@@ -1,4 +1,4 @@
-Esto se llama "Front Matter". Es la metadata del post.
+---
 
 layout: post
 title: "Mi Primer Artículo"
