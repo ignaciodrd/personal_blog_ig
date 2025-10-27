@@ -3,6 +3,7 @@
 layout: post
 title: "Mi Primer Artículo"
 date: 2025-10-22
+---
 
 Esto es Markdown. Es mucho más fácil que HTML.
 
