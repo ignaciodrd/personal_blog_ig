@@ -2,6 +2,7 @@
 layout: post
 title: "Primer Post desde Prose.io"
 date: 2025-10-24
+proyecto: "Mi Blog Personal"
 excerpt: "Probando la creación de contenido directamente desde Prose.io"
 ---
 

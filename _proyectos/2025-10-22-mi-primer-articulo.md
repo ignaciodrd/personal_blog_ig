@@ -2,6 +2,7 @@
 layout: post
 title: "Mi Primer Artículo"
 date: 2025-10-22
+proyecto: "Mi Blog Personal"
 excerpt: "Aprender a programar y desplegar este sitio es una aventura emocionante."
 ---
 

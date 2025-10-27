@@ -2,6 +2,7 @@
 layout: post
 title: "Reorganizando Mi Blog"
 date: 2025-10-27
+proyecto: "Mi Blog Personal"
 excerpt: "Estructurando el contenido por temáticas para mejor organización"
 ---
 
