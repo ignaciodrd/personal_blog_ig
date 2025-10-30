@@ -10,10 +10,10 @@ Este es el contenido completo de mi primer artículo. Aprender a programar y des
 
 ## El Proceso
 
-El primer paso fue simplemente crear el archivo `index.html`. Usar Tailwind CSS directamente desde un CDN (esa línea `<script>` en el `<head>`) fue la clave. Me permitió diseñar sin un proceso de "build" o instalación.
+El primer paso fue simplemente iterar mucho con la IA para que me ayude a creaer lo que yo quería. Al no saber de programación formal, nos encontramos con limitaciones constantes, pero hoy con inteligencia artificial es, aunque engorroso aún, posible. 
 
 ## Publicación
 
 Luego, el proceso de publicación con GitHub Pages fue sorprendentemente sencillo. Unos pocos clics en "Settings" > "Pages" y el sitio estaba en vivo. 
 
-Ahora, el siguiente desafío es conectar esto al mundo Web3.
+Ahora, el siguiente desafío es conectar esto al mundo Web, pero primero haré algunos posteos más y le daré algún orden a todo esto.
