@@ -29,6 +29,12 @@ layout: null
         background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
         background-size: 16px 16px;
       }
+      .collapse-arrow {
+        transition: transform 0.3s ease;
+      }
+      .collapse-arrow.collapsed {
+        transform: rotate(-90deg);
+      }
     </style>
 </head>
 <body class="font-sans text-gray-800">
@@ -41,7 +47,7 @@ layout: null
                 {{ site.title }}
             </h1>
             <p class="text-xl text-gray-600 mt-3">
-                product developer, escritor, creador.
+                productero, escritor, creador
             </p>
         </header>
 
@@ -52,7 +58,7 @@ layout: null
                 <h2 class="text-3xl font-bold mb-4">Sobre Mí</h2>
                 <p class="text-gray-700 leading-relaxed">
                     ¡Bienvenido a mi espacio personal! Soy un apasionado por la tecnología y
-                    el aprendizaje. Este proyecto es mi primer paso para documentar mi viaje...
+                    el aprendizaje. Este proyecto fue mi primer paso para documentar mi viaje...
                 </p>
                 <a href="{{ site.baseurl }}/CV_Ejecutivo_Ignacio_Duarte.pdf" class="inline-block mt-6 bg-blue-600 text-white font-medium py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
                     Ver mi CV completo
@@ -62,10 +68,18 @@ layout: null
             <!-- SECCIÓN: PROYECTOS AGRUPADOS -->
             <section id="proyectos" class="mb-16">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold">Proyectos</h2>
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-3xl font-bold">Proyectos</h2>
+                        <button onclick="toggleSection('proyectos-content')" class="text-blue-600 hover:text-blue-800 transition-colors">
+                            <svg id="proyectos-arrow" class="collapse-arrow w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <span class="text-blue-600 font-medium">🚀</span>
                 </div>
                 
+                <div id="proyectos-content">
                 {% if site.proyectos.size > 0 %}
                 
                 {% assign proyectos_agrupados = site.proyectos | group_by: "proyecto" %}
@@ -74,12 +88,20 @@ layout: null
                     {% if grupo.name != "" %}
                     <!-- Cada proyecto en su propia tarjeta -->
                     <div class="mb-8 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
-                        <h3 class="text-2xl font-bold text-blue-600 mb-4">
-                            📁 {{ grupo.name }}
-                        </h3>
+                        <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleProject('proyecto-{{ forloop.index }}')">
+                            <div class="flex items-center gap-3">
+                                <h3 class="text-2xl font-bold text-blue-600">
+                                    📁 {{ grupo.name }}
+                                </h3>
+                                <svg id="proyecto-{{ forloop.index }}-arrow" class="collapse-arrow w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-sm text-gray-500">{{ grupo.items.size }} artículo{% if grupo.items.size != 1 %}s{% endif %}</span>
+                        </div>
                         
                         <!-- Lista de artículos del proyecto -->
-                        <div class="space-y-3 ml-4">
+                        <div id="proyecto-{{ forloop.index }}-content" class="space-y-3 ml-4">
                             {% assign articulos_ordenados = grupo.items | sort: 'date' | reverse %}
                             {% for articulo in articulos_ordenados %}
                             <div class="border-l-4 border-blue-200 pl-4 py-2 hover:border-blue-400 transition-colors">
@@ -134,15 +156,24 @@ layout: null
                     <p class="text-gray-500">Pronto compartiré mis proyectos aquí...</p>
                 </div>
                 {% endif %}
+                </div>
             </section>
             
             <!-- SECCIÓN: REFLEXIONES -->
             <section id="reflexiones" class="mb-16">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold">Reflexiones</h2>
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-3xl font-bold">Reflexiones</h2>
+                        <button onclick="toggleSection('reflexiones-content')" class="text-purple-600 hover:text-purple-800 transition-colors">
+                            <svg id="reflexiones-arrow" class="collapse-arrow w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <span class="text-purple-600 font-medium">💭</span>
                 </div>
                 
+                <div id="reflexiones-content">
                 {% if site.reflexiones.size > 0 %}
                 <div class="space-y-6">
                     {% assign reflexiones_ordenadas = site.reflexiones | sort: 'date' | reverse %}
@@ -168,15 +199,24 @@ layout: null
                     <p class="text-gray-500">Pronto compartiré mis reflexiones aquí...</p>
                 </div>
                 {% endif %}
+                </div>
             </section>
             
             <!-- SECCIÓN: OTROS -->
             <section id="otros" class="mb-16">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold">Otros</h2>
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-3xl font-bold">Otros</h2>
+                        <button onclick="toggleSection('otros-content')" class="text-green-600 hover:text-green-800 transition-colors">
+                            <svg id="otros-arrow" class="collapse-arrow w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <span class="text-green-600 font-medium">✨</span>
                 </div>
                 
+                <div id="otros-content">
                 {% if site.otros.size > 0 %}
                 <div class="space-y-6">
                     {% assign otros_ordenados = site.otros | sort: 'date' | reverse %}
@@ -202,16 +242,17 @@ layout: null
                     <p class="text-gray-500">Contenido variado próximamente...</p>
                 </div>
                 {% endif %}
+                </div>
             </section>
             
             <!-- SECCIÓN: REDES SOCIALES -->
             <section id="contacto" class="text-center mb-16">
                 <h2 class="text-3xl font-bold mb-6">Conecta Conmigo</h2>
                 <div class="flex justify-center space-x-6">
-                    <a href="https://linkedin.com/in/ignacio-duarte" target="_blank" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
+                    <a href="https://linkedin.com/in/ignacio-duarte" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
                         LinkedIn
                     </a>
-                    <a href="https://github.com/ignaciodrd" target="_blank" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
+                    <a href="https://github.com/ignaciodrd" class="text-gray-600 hover:text-blue-600 transition-colors text-lg font-medium">
                         GitHub
                     </a>
                 </div>
@@ -220,8 +261,40 @@ layout: null
         </main>
         
         <footer class="text-center text-gray-500 py-8 border-t border-gray-200">
-            <p>&copy; 2025 {{ site.title }}. Construido con Gemini, Claude y ChatGPT.</p>
+            <p>&copy; 2025 {{ site.title }}. Construido con: Jekyll y Tailwind CSS; Claude y Gemini; Github y Prose.io.</p>
         </footer>
     </div>
+
+    <script>
+        // Función para colapsar/expandir secciones principales
+        function toggleSection(contentId) {
+            const content = document.getElementById(contentId);
+            const arrowId = contentId.replace('-content', '-arrow');
+            const arrow = document.getElementById(arrowId);
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                arrow.classList.remove('collapsed');
+            } else {
+                content.style.display = 'none';
+                arrow.classList.add('collapsed');
+            }
+        }
+
+        // Función para colapsar/expandir proyectos individuales
+        function toggleProject(projectId) {
+            const content = document.getElementById(projectId + '-content');
+            const arrow = document.getElementById(projectId + '-arrow');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                arrow.classList.remove('collapsed');
+            } else {
+                content.style.display = 'none';
+                arrow.classList.add('collapsed');
+            }
+        }
+    </script>
+
 </body>
 </html>
